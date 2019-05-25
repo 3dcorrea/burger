@@ -1,38 +1,44 @@
-var connection = require("./connection.js");
+var connection = require('./connection.js');
+connection.connect(function (err) {
+  if (err) {
+    console.error('error connecting: ' + err.stack);
+    return;
+  };
+  console.log('connected as id ' + connection.threadId);
+});
 
 var orm = {
-  select: function (whatToSelect, tableInput) {
-    var queryString = "SELECT ?? FROM ??";
-    connection.query(queryString, [whatToSelect, tableInput], function (err, result) {
+  selectAll: function (callback) {
+    connection.query('SELECT * FROM burgers', function (err, result) {
       if (err) throw err;
-      console.log(result);
+      callback(result);
     });
+
   },
-  selectWhere: function (tableInput, colToSearch, valOfCol) {
-    var queryString = "SELECT * FROM ?? WHERE ?? = ?";
+  insertOne: function (burger_name, callback) {
 
-    console.log(queryString);
-
-    connection.query(queryString, [tableInput, colToSearch, valOfCol], function (err, result) {
+    connection.query('INSERT INTO burgers SET ?', {
+      burger_name: burger_name,
+      devoured: false,
+    }, function (err, result) {
       if (err) throw err;
-      console.log(result);
+      callback(result);
     });
+
   },
-  leftJoin: function (whatToSelect, tableOne, tableTwo, onTableOneCol, onTableTwoCol) {
-    var queryString = "SELECT ?? FROM ?? AS tOne";
-    queryString += " LEFT JOIN ?? AS tTwo";
-    queryString += " ON tOne.?? = tTwo.??";
 
-    console.log(queryString);
-
-    connection.query(queryString, [whatToSelect, tableOne, tableTwo, onTableOneCol, onTableTwoCol], function (
-      err,
-      result
-    ) {
+  updateOne: function (burgerID, callback) {
+    connection.query('UPDATE burgers SET ? WHERE ?', [{
+      devoured: true
+    }, {
+      id: burgerID
+    }], function (err, result) {
       if (err) throw err;
-      console.log(result);
+      callback(result);
     });
+
   }
+
 };
 
 module.exports = orm;
