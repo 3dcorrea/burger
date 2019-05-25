@@ -1,23 +1,14 @@
-var express = require("express");
-
+var express = require('express');
 var app = express();
-var PORT = process.env.PORT || 8080;
+app.use(express.static(process.cwd() + '/public'));
 
-var db = require("./models");
+var exphbs = require('express-handlebars');
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
 
-app.use(express.urlencoded({
-    extended: true
-}));
-app.use(express.json());
 
-app.use(express.static("public"));
+var router = require('./controllers/burgers_controllers.js');
+app.use('/', router);
 
-require("./routes/api-routes.js")(app);
-
-db.sequelize.sync({
-    force: true
-}).then(function () {
-    app.listen(PORT, function () {
-        console.log("App listening on PORT " + PORT);
-    });
-});
+var port = process.env.PORT || 3000;
+app.listen(port);

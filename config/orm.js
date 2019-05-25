@@ -13,7 +13,6 @@ var orm = {
       if (err) throw err;
       callback(result);
     });
-
   },
   insertOne: function (burger_name, callback) {
 
@@ -24,9 +23,7 @@ var orm = {
       if (err) throw err;
       callback(result);
     });
-
   },
-
   updateOne: function (burgerID, callback) {
     connection.query('UPDATE burgers SET ? WHERE ?', [{
       devoured: true
@@ -36,9 +33,6 @@ var orm = {
       if (err) throw err;
       callback(result);
     });
-
   }
-
 };
-
 module.exports = orm;

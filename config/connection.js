@@ -1,14 +1,14 @@
-var Sequelize = require("sequelize");
 var mysql = require('mysql');
+var connection;
+if (process.env.PORT) {
+    connection = mysql.createConnection(process.env.PORT);
+} else {
+    connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '1111',
+        database: 'burgers_db'
+    });
+}
 
-var sequelize = new Sequelize("burgers_db", "root", "1111", {
-    host: "localhost",
-    port: 3306,
-    dialect: "mysql",
-    pool: {
-        max: 5,
-        min: 0,
-        idle: 10000
-    }
-});
-module.exports = sequelize;
+module.exports = connection;
