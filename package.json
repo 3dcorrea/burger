@@ -2,7 +2,7 @@
   "name": "burger",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,8 +17,12 @@
   },
   "homepage": "https://github.com/3dcorrea/burger#readme",
   "dependencies": {
+    "express": "^4.17.0",
     "express-handlebars": "^3.1.0",
     "mysql": "^2.17.1",
     "sequelize": "^5.8.6"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^5.4.0"
   }
 }
