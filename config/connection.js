@@ -1,6 +1,7 @@
 var mysql = require('mysql');
 var connection;
 var PORT = process.env.PORT || 3000;
+var app = require("../server.js");
 
 if (process.env.PORT) {
     connection = mysql.createConnection(process.env.PORT);
