@@ -14,6 +14,6 @@ if (process.env.PORT) {
 }
 
 app.listen(PORT, function () {
-    console.log('Example app listening on port ' + port + '!');
+    console.log('Listening on port ' + PORT + '!');
 });
 module.exports = connection;
