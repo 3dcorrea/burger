@@ -1,7 +1,6 @@
 var mysql = require('mysql');
 var app = require("../server.js");
 var connection;
-var PORT = process.env.JAWSDB_URL || 3000;
 
 if (process.env.JAWSDB_URL) {
     connection = mysql.createConnection(process.env.JAWSDB_URL);
@@ -14,7 +13,4 @@ if (process.env.JAWSDB_URL) {
     });
 }
 
-app.listen(PORT, function () {
-    console.log('Listening on port ' + PORT + '!');
-});
-module.exports = connection;    
+module.exports = connection;
