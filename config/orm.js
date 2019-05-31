@@ -4,7 +4,7 @@ connection.connect(function (err) {
     console.error('error connecting: ' + err.stack);
     return;
   };
-  console.log('connected as id ' + connection.threadId);
+  console.log('Connected as id: ' + connection.threadId);
 });
 
 var orm = {
